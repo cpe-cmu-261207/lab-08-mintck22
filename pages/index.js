@@ -18,11 +18,23 @@ export default function Home() {
     //copy from old 2d Array
     const newPixels = CanvasLib.copyCanvas(pixels);
     //your code here
+    //update newPixels[...][...] xPos, yPos, selColor
+    //setPixels(...)
+    newPixels[yPos][xPos] = selColor;
+    setPixels(newPixels);
   };
 
   const clear = () => {
     //your code here
     //Hint : use CanvasLib.createEmptyCanvas()
+    const newPixels = CanvasLib.createEmptyCanvas();
+    setPixels(newPixels);
+  };
+
+  const random = () => {
+    const newPixels = CanvasLib.createRandomCanvas();
+    // newPixels[yPos][xPos] = selColor;
+    setPixels(newPixels);
   };
 
   return (
@@ -36,7 +48,18 @@ export default function Home() {
           <button className="btn btn-dark" onClick={clear}>
             Clear
           </button>
-          <button className="btn btn-dark">Random Color</button>
+          <button className="btn btn-dark" onClick={random}>
+            Random Color
+          </button>
+          {/* <button
+            className="btn btn-dark"
+            onClick={
+              clearInterval(setInterval(random, 2000))
+              // random
+            }
+          >
+            Play Disco
+          </button> */}
         </div>
       </PainterContext.Provider>
     </div>
