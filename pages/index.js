@@ -27,14 +27,21 @@ export default function Home() {
   const clear = () => {
     //your code here
     //Hint : use CanvasLib.createEmptyCanvas()
-    const newPixels = CanvasLib.createEmptyCanvas();
-    setPixels(newPixels);
+    setPixels(CanvasLib.createEmptyCanvas());
   };
 
   const random = () => {
-    const newPixels = CanvasLib.createRandomCanvas();
-    // newPixels[yPos][xPos] = selColor;
-    setPixels(newPixels);
+    setPixels(CanvasLib.createRandomCanvas());
+  };
+
+  const [intervalId, setIntervalId] = useState([]);
+  const playDisco = () => {
+    const id = setInterval(random, 100);
+    setIntervalId([...intervalId, id]);
+  };
+
+  const stopDisco = () => {
+    for (const id of intervalId) clearInterval(id);
   };
 
   return (
@@ -51,15 +58,12 @@ export default function Home() {
           <button className="btn btn-dark" onClick={random}>
             Random Color
           </button>
-          {/* <button
-            className="btn btn-dark"
-            onClick={
-              clearInterval(setInterval(random, 2000))
-              // random
-            }
-          >
+          <button className="btn btn-dark" onClick={playDisco}>
             Play Disco
-          </button> */}
+          </button>
+          <button className="btn btn-dark" onClick={stopDisco}>
+            Stop Disco
+          </button>
         </div>
       </PainterContext.Provider>
     </div>
